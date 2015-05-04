@@ -1,0 +1,24 @@
+plugins {
+  id 'c'
+  id 'java'
+}
+
+version = '1.0'
+
+model {
+  components {
+    main(NativeExecutableSpec) {
+      baseName 'brave-hello'
+    }
+  }
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'com.tindandelion.hello.LinuxHello'
+  }
+}
+
+
+
+

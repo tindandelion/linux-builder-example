@@ -1,0 +1,4 @@
+.vagrant
+.gradle
+brave-hello/.gradle
+brave-hello/build

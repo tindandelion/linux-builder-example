@@ -1,0 +1,25 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies { classpath 'com.bmuschko:gradle-vagrant-plugin:2.0' }
+}
+
+apply plugin: 'com.bmuschko.vagrant-base'
+import com.bmuschko.gradle.vagrant.tasks.*
+
+// Suppress installation validation on Windows
+vagrant.installation.validate = false 
+
+task startVm(type: VagrantUp) {
+  description = 'Starts a builder virtual machine'
+}
+
+task build(type: VagrantSsh) {
+  description = 'Triggers the build procedure inside virtual machine'
+  sshCommand = 'docker run --rm -v /workspace:/workspace builder'
+
+  dependsOn startVm
+}
+
+task clean(type: VagrantDestroy) {
+  description = 'Destroys the builder virtual maachine'
+}
